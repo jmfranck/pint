@@ -108,6 +108,7 @@ class DefaultFormatter(BaseFormatter):
             single_denominator=False,
             product_fmt="{} * {}",
             division_fmt=division_fmt,
+            sqrt_fmt="√{}",
             power_fmt="{} ** {}",
             parentheses_fmt=r"({})",
         )
@@ -223,6 +224,7 @@ class CompactFormatter(BaseFormatter):
             single_denominator=False,
             product_fmt="*",  # TODO: Should this just be ''?
             division_fmt=division_fmt,
+            sqrt_fmt="√{}",
             power_fmt="{}**{}",
             parentheses_fmt=r"({})",
         )
@@ -336,6 +338,7 @@ class PrettyFormatter(BaseFormatter):
             single_denominator=False,
             product_fmt="·",
             division_fmt=division_fmt,
+            sqrt_fmt="√{}",
             power_fmt="{}{}",
             parentheses_fmt="({})",
             exp_call=pretty_fmt_exponent,

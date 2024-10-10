@@ -217,6 +217,7 @@ class LatexFormatter(BaseFormatter):
             single_denominator=True,
             product_fmt=r" \cdot ",
             division_fmt=r"\frac[{}][{}]",
+            sqrt_fmt=r"\sqrt[{}]",
             power_fmt="{}^[{}]",
             parentheses_fmt=r"\left({}\right)",
         )

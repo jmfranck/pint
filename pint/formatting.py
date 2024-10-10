@@ -57,6 +57,7 @@ def formatter(
     single_denominator: bool = False,
     product_fmt: str = " * ",
     division_fmt: str = " / ",
+    sqrt_fmt: str = "√{}",
     power_fmt: str = "{} ** {}",
     parentheses_fmt: str = "({0})",
     exp_call: FORMATTER = "{:n}".format,
@@ -111,10 +112,15 @@ def formatter(
     pos_terms, neg_terms = [], []
 
     for key, value in items:
+        print(key,value)
         if value == 1:
             pos_terms.append(key)
+        elif value == 0.5:
+            pos_terms.append(sqrt_fmt.format(key))
         elif value > 0:
             pos_terms.append(power_fmt.format(key, fun(value)))
+        elif value == -0.5 and as_ratio:
+            neg_terms.append(sqrt_fmt.format(key))
         elif value == -1 and as_ratio:
             neg_terms.append(key)
         else:

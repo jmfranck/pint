@@ -160,6 +160,7 @@ def formatter(
     single_denominator: bool = False,
     product_fmt: str = " * ",
     division_fmt: str = " / ",
+    sqrt_fmt: str = "√{}",
     power_fmt: str = "{} ** {}",
     parentheses_fmt: str = "({0})",
     exp_call: FORMATTER = "{:n}".format,
@@ -202,6 +203,8 @@ def formatter(
     for key, value in numerator:
         if value == 1:
             pos_terms.append(key)
+        elif value == 0.5:
+            pos_terms.append(sqrt_fmt.format(key))
         else:
             pos_terms.append(power_fmt.format(key, fun(value)))
 
@@ -209,6 +212,8 @@ def formatter(
     for key, value in denominator:
         if value == -1 and as_ratio:
             neg_terms.append(key)
+        elif value == -0.5 and as_ratio:
+            neg_terms.append(sqrt_fmt.format(key))
         else:
             neg_terms.append(power_fmt.format(key, fun(value)))
 
