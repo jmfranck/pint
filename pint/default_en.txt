@@ -222,7 +222,7 @@ hectare = 100 * are = ha
 
 # Volume
 [volume] = [length] ** 3
-liter = decimeter ** 3 = l = L = ℓ = litre
+liter = decimeter ** 3 = L = ℓ = litre
 cubic_centimeter = centimeter ** 3 = cc
 lambda = microliter = λ
 stere = meter ** 3

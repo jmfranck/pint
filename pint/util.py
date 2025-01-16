@@ -923,6 +923,8 @@ _subs_re = [
 ]
 _pretty_table = str.maketrans("⁰¹²³⁴⁵⁶⁷⁸⁹·⁻", "0123456789*-")
 _pretty_exp_re = re.compile(r"(⁻?[⁰¹²³⁴⁵⁶⁷⁸⁹]+(?:\.[⁰¹²³⁴⁵⁶⁷⁸⁹]*)?)")
+_starting_sqrt_re = re.compile(r"^√(\w+)")
+_sqrt_re = re.compile(r"√(\w+)")
 
 
 def string_preprocessor(input_string: str) -> str:
@@ -932,6 +934,8 @@ def string_preprocessor(input_string: str) -> str:
     for a, b in _subs_re:
         input_string = a.sub(b, input_string)
 
+    input_string = _starting_sqrt_re.sub(r"\1^{0.5}", input_string)
+    input_string = _sqrt_re.sub(r"*\1^{0.5}", input_string)
     input_string = _pretty_exp_re.sub(r"**(\1)", input_string)
     # Replace pretty format characters
     input_string = input_string.translate(_pretty_table)
