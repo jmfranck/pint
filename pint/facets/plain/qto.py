@@ -3,6 +3,7 @@ from __future__ import annotations
 import bisect
 import math
 import numbers
+import sys
 import warnings
 from typing import TYPE_CHECKING
 
@@ -94,9 +95,9 @@ def to_compact(
 
     >>> import pint
     >>> ureg = pint.UnitRegistry()
-    >>> (200e-9*ureg.s).to_compact()
+    >>> (200e-9 * ureg.s).to_compact()
     <Quantity(200.0, 'nanosecond')>
-    >>> (1e-2*ureg('kg m/s^2')).to_compact('N')
+    >>> (1e-2 * ureg("kg m/s^2")).to_compact("N")
     <Quantity(10.0, 'millinewton')>
     """
 
@@ -176,16 +177,21 @@ def to_preferred(
 ) -> PlainQuantity:
     """Return Quantity converted to a unit composed of the preferred units.
 
+    Note: this feature crashes on Python >= 3.12 (issue #2121).
+
     Examples
     --------
 
     >>> import pint
     >>> ureg = pint.UnitRegistry()
-    >>> (1*ureg.acre).to_preferred([ureg.meters])
+    >>> (1 * ureg.acre).to_preferred([ureg.meters])
     <Quantity(4046.87261, 'meter ** 2')>
-    >>> (1*(ureg.force_pound*ureg.m)).to_preferred([ureg.W])
+    >>> (1 * (ureg.force_pound * ureg.m)).to_preferred([ureg.W])
     <Quantity(4.44822162, 'watt * second')>
     """
+
+    if sys.version_info.major == 3 and sys.version_info.minor >= 12:
+        raise Exception("This feature crashes on Python >= 3.12 (issue #2121)")
 
     units = _get_preferred(quantity, preferred_units)
     return quantity.to(units)
@@ -196,16 +202,21 @@ def ito_preferred(
 ) -> PlainQuantity:
     """Return Quantity converted to a unit composed of the preferred units.
 
+    Note: this feature crashes on Python >= 3.12 (issue #2121).
+
     Examples
     --------
 
     >>> import pint
     >>> ureg = pint.UnitRegistry()
-    >>> (1*ureg.acre).to_preferred([ureg.meters])
+    >>> (1 * ureg.acre).to_preferred([ureg.meters])
     <Quantity(4046.87261, 'meter ** 2')>
-    >>> (1*(ureg.force_pound*ureg.m)).to_preferred([ureg.W])
+    >>> (1 * (ureg.force_pound * ureg.m)).to_preferred([ureg.W])
     <Quantity(4.44822162, 'watt * second')>
     """
+
+    if sys.version_info.major == 3 and sys.version_info.minor >= 12:
+        raise Exception("This feature crashes on Python >= 3.12 (issue #2121)")
 
     units = _get_preferred(quantity, preferred_units)
     return quantity.ito(units)
